@@ -2,4 +2,4 @@
 
 Umuttepe Turizm Bilet Kontrol Uygulaması
 
-![barcode](https://github.com/Arifcngk/umuttepe_turizm_muavin-/assets/93188117/cf5d8434-68ab-4733-8f8e-9cbfe0be5159)
+![ticket_view_ss](https://github.com/Arifcngk/umuttepe_turizm_muavin-/assets/93188117/e2dc4cb9-7920-483a-84dd-06a77860e74d)
