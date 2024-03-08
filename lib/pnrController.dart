@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class QrCodeCodePage extends StatefulWidget {
+class PnrControllerPage extends StatefulWidget {
   final String name;
   final String surname;
   final String tc;
@@ -12,7 +12,7 @@ class QrCodeCodePage extends StatefulWidget {
   final String hour;
   final String seatNo;
 
-  const QrCodeCodePage({
+  const PnrControllerPage({
     Key? key,
     required this.name,
     required this.surname,
@@ -27,10 +27,10 @@ class QrCodeCodePage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<QrCodeCodePage> createState() => _QrCodeCodePageState();
+  State<PnrControllerPage> createState() => _PnrControllerPageState();
 }
 
-class _QrCodeCodePageState extends State<QrCodeCodePage> {
+class _PnrControllerPageState extends State<PnrControllerPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(

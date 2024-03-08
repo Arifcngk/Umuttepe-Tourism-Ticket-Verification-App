@@ -1,13 +1,13 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
-class PnrKontrolPage extends StatefulWidget {
-  const PnrKontrolPage({super.key});
+class PnrControl extends StatefulWidget {
+  const PnrControl({super.key});
 
   @override
-  State<PnrKontrolPage> createState() => _PnrKontrolPageState();
+  State<PnrControl> createState() => _PnrControlState();
 }
 
-class _PnrKontrolPageState extends State<PnrKontrolPage> {
+class _PnrControlState extends State<PnrControl> {
   @override
   Widget build(BuildContext context) {
     return const Placeholder();
