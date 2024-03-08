@@ -10,10 +10,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Umutte Turizm ',
-      home: const HomePage(),
+      title: 'Umuttepe Turizm ',
+      home: HomePage(),
     );
   }
 }

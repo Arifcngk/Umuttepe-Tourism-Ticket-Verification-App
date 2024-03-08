@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:umuttepe_turizm/pnr_kontrol.dart';
+import 'package:umuttepe_turizm/ticketController.dart';
 import 'package:umuttepe_turizm/pnrController.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,22 +31,8 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.black,
                 onPressed: () {
                   // QR OKUT butonuna tıklandığında yapılacak işlemler
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => PnrControllerPage(
-                          busPlate: "Aa",
-                          busTime: "",
-                          from: "Gebze",
-                          hour: "12",
-                          name: "Arif",
-                          phone: "7463272",
-                          seatNo: "3",
-                          surname: "Gök",
-                          tc: "12132312",
-                          to: "İstalbul",
-                        ),
-                      ));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => MyTicketView()));
                 },
               ),
               SizedBox(height: 20),
@@ -85,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => PnrControl()),
+                                      builder: (context) => MyTicketView()),
                                 );
                               },
                               icon: Icon(Icons.approval),
@@ -110,7 +96,11 @@ class _HomePageState extends State<HomePage> {
                 icon: Icons.help,
                 color: Colors.red,
                 onPressed: () {
-                  // YARDIM butonuna tıklandığında yapılacak işlemler
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MyTicketView(),
+                      ));
                   print("YARDIM butonuna tıklandı");
                 },
               ),
