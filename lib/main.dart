@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:umuttepe_turizm/home_page.dart';
+import 'package:umuttepe_turizm/login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Umuttepe Turizm ',
-      home: HomePage(),
+      home: LoginPage(),
     );
   }
 }
