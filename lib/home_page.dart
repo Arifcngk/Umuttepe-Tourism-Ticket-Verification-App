@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:umuttepe_turizm/ticketController.dart';
-import 'package:umuttepe_turizm/pnrController.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key});

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import 'home_page.dart';
+import 'package:umuttepe_turizm/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -31,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
           // Eğer giriş başarılıysa ana sayfaya yönlendirin
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => HomePage()),
+            MaterialPageRoute(builder: (context) => const HomePage()),
           );
         } else {
           // Eğer giriş başarısızsa hata mesajı gösterin
