@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:umuttepe_turizm/ticketController.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key});
@@ -9,7 +10,29 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String qrText =
+      'QR kod sonucu burada gösterilecek'; // QR kodu sonucunu tutacak değişken
+
   var pnr;
+
+  // QR kodu tarayıcı işlevi
+  Future<void> scanQR() async {
+    String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+        '#ff6666', 'İptal', true, ScanMode.QR);
+    if (!mounted) return;
+    setState(() {
+      qrText = barcodeScanRes; // QR kodu sonucunu güncelle
+    });
+
+    // Okunan QR kodunu yeni sayfaya aktar
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MyTicketView(pnrNumber: qrText),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -29,6 +52,7 @@ class _HomePageState extends State<HomePage> {
                 icon: Icons.qr_code,
                 color: Colors.black,
                 onPressed: () {
+                  scanQR();
                   // QR OKUT butonuna tıklandığında yapılacak işlemler
                 },
               ),

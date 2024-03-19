@@ -3,6 +3,7 @@ import 'package:ticket_widget/ticket_widget.dart';
 
 class MyTicketView extends StatefulWidget {
   final String pnrNumber;
+
   const MyTicketView({Key? key, required this.pnrNumber}) : super(key: key);
 
   @override
