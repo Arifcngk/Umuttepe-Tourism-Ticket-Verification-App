@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:ticket_widget/ticket_widget.dart';
 
 class MyTicketView extends StatefulWidget {
-  const MyTicketView({Key? key}) : super(key: key);
+  final String pnrNumber;
+  const MyTicketView({Key? key, required this.pnrNumber}) : super(key: key);
 
   @override
   State<MyTicketView> createState() => _MyTicketViewState();
@@ -20,7 +21,7 @@ class _MyTicketViewState extends State<MyTicketView> {
             height: 450, // Widget'ın yüksekliği
             isCornerRounded: true,
             padding: EdgeInsets.all(20),
-            child: TicketData(),
+            child: TicketData(pnrNumber: widget.pnrNumber),
           ),
         ),
       ),
@@ -30,9 +31,9 @@ class _MyTicketViewState extends State<MyTicketView> {
 }
 
 class TicketData extends StatelessWidget {
-  const TicketData({
-    Key? key,
-  }) : super(key: key);
+  final String pnrNumber;
+
+  const TicketData({Key? key, required this.pnrNumber}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -113,10 +114,10 @@ class TicketData extends StatelessWidget {
               image: DecorationImage(
                   image: AssetImage('assets/barcode.png'), fit: BoxFit.cover)),
         ),
-        const Padding(
+        Padding(
           padding: EdgeInsets.only(top: 10.0, left: 30.0, right: 30.0),
           child: Text(
-            '0000 +9230 2884 5163',
+            'PNR Numarası :  $pnrNumber ',
             style: TextStyle(
               color: Colors.black,
             ),

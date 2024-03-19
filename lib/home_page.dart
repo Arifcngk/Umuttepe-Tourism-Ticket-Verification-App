@@ -9,7 +9,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  void pnrCozucu(String pnr) {}
+  var pnr;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -30,8 +30,6 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.black,
                 onPressed: () {
                   // QR OKUT butonuna tıklandığında yapılacak işlemler
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MyTicketView()));
                 },
               ),
               SizedBox(height: 20),
@@ -46,17 +44,22 @@ class _HomePageState extends State<HomePage> {
                     builder: (context) => AlertDialog(
                       title: Text("PNR Numarasını Giriniz"),
                       contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 34,
-                          vertical: 50), // form genişlik ve yükseklik
+                          horizontal: 34, vertical: 50),
                       content: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
                           const SizedBox(height: 20),
                           TextFormField(
+                            // PNR numarası girişi için text form field
                             decoration: const InputDecoration(
-                                labelText: 'PNR Numarası',
-                                labelStyle: TextStyle(color: Colors.black),
-                                hintStyle: TextStyle(color: Colors.black)),
+                              labelText: 'PNR Numarası',
+                              labelStyle: TextStyle(color: Colors.black),
+                              hintStyle: TextStyle(color: Colors.black),
+                            ),
+                            onChanged: (value) {
+                              pnr =
+                                  value; // Kullanıcının girdiği PNR numarasını al
+                            },
                           ),
                           const SizedBox(height: 20),
                         ],
@@ -70,7 +73,10 @@ class _HomePageState extends State<HomePage> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => MyTicketView()),
+                                    builder: (context) => MyTicketView(
+                                        pnrNumber:
+                                            pnr), // PNR numarasını parametre olarak geçir
+                                  ),
                                 );
                               },
                               icon: Icon(Icons.approval),
@@ -95,11 +101,6 @@ class _HomePageState extends State<HomePage> {
                 icon: Icons.help,
                 color: Colors.red,
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => MyTicketView(),
-                      ));
                   print("YARDIM butonuna tıklandı");
                 },
               ),
