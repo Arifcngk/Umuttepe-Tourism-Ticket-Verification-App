@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:ticket_widget/ticket_widget.dart';
+import 'package:http/http.dart' as http;
 
 class MyTicketView extends StatefulWidget {
   final String pnrNumber;
@@ -11,6 +14,66 @@ class MyTicketView extends StatefulWidget {
 }
 
 class _MyTicketViewState extends State<MyTicketView> {
+  TextEditingController idController = TextEditingController();
+  String pnrCode = "";
+  String nereden = "";
+  String nereye = "";
+  String adi = "";
+  String soyadi = "";
+  String tarih = "";
+  String koltuk = "";
+  String plaka = "";
+  String saat = "";
+
+  @override
+  void initState() {
+    super.initState();
+    // Sayfa yüklenirken getUserInfo fonksiyonunu çağırarak verileri çek
+    getUserInfo(int.parse(widget.pnrNumber));
+  }
+
+  Future<void> getUserInfo(int id) async {
+    final response = await http.post(
+      Uri.parse("http://10.0.2.2:8080/flutter_api/pnr.php"), // API endpointi
+      body: {'id': id.toString()}, // Kullanıcı ID'si
+    );
+
+    if (response.statusCode == 200) {
+      // HTTP isteği başarılı ise verileri al
+      Map<String, dynamic> data = json.decode(response.body);
+      setState(() {
+        pnrCode = data['pnr_code'];
+        nereden = data['nereden'];
+        nereye = data['nereye'];
+        adi = data['adi'];
+        soyadi = data['soyadi'];
+        tarih = data['tarih'];
+        koltuk = data['koltuk'];
+        plaka = data['plaka'];
+        saat = data['saat'];
+      });
+    } else {
+      // HTTP isteği başarısız ise hata mesajı göster
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Hata'),
+            content: Text('Kullanıcı bilgileri alınamadı.'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Tamam'),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +85,18 @@ class _MyTicketViewState extends State<MyTicketView> {
             height: 450, // Widget'ın yüksekliği
             isCornerRounded: true,
             padding: EdgeInsets.all(20),
-            child: TicketData(pnrNumber: widget.pnrNumber),
+            child: TicketData(
+              pnrNumber: widget.pnrNumber,
+              pnrCode: pnrCode,
+              nereden: nereden,
+              nereye: nereye,
+              adi: adi,
+              soyadi: soyadi,
+              tarih: tarih,
+              koltuk: koltuk,
+              plaka: plaka,
+              saat: saat,
+            ),
           ),
         ),
       ),
@@ -33,8 +107,29 @@ class _MyTicketViewState extends State<MyTicketView> {
 
 class TicketData extends StatelessWidget {
   final String pnrNumber;
+  final String pnrCode;
+  final String nereden;
+  final String nereye;
+  final String adi;
+  final String soyadi;
+  final String tarih;
+  final String koltuk;
+  final String plaka;
+  final String saat;
 
-  const TicketData({Key? key, required this.pnrNumber}) : super(key: key);
+  const TicketData({
+    Key? key,
+    required this.pnrNumber,
+    required this.pnrCode,
+    required this.nereden,
+    required this.nereye,
+    required this.adi,
+    required this.soyadi,
+    required this.tarih,
+    required this.koltuk,
+    required this.plaka,
+    required this.saat,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -56,10 +151,10 @@ class TicketData extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Row(
+            Row(
               children: [
                 Text(
-                  'Kocaeli',
+                  nereden,
                   style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -75,7 +170,7 @@ class TicketData extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(left: 8.0),
                   child: Text(
-                    'Sakarya',
+                    nereye,
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -92,19 +187,19 @@ class TicketData extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 12.0, right: 45.0, left: 40),
               child: ticketDetailsWidget(
-                  'Adı-Soyadı:', 'Arif Can Gök', 'Tarih:', '28-08-2024'),
+                  'Adı-Soyadı:', '$adi $soyadi', 'Tarih:', tarih),
             ),
             SizedBox(height: 12),
             Padding(
               padding: const EdgeInsets.only(top: 12.0, right: 45.0, left: 40),
               child: ticketDetailsWidget(
-                  'Araç Plakası:', '34TG2638', 'Koltuk No:', '66B'),
+                  'Araç Plakası:', plaka, 'Koltuk No:', koltuk),
             ),
             SizedBox(height: 12),
             Padding(
               padding: const EdgeInsets.only(
                   top: 12.0, right: 75.0, left: 40, bottom: 20),
-              child: ticketDetailsWidget('Statü', 'Öğrenci', 'Saat', '13.00'),
+              child: ticketDetailsWidget('Statü', 'Öğrenci', 'Saat', saat),
             ),
           ],
         ),

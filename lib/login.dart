@@ -52,13 +52,18 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blueGrey,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FlutterLogo(size: 100),
+              Image.asset(
+                "assets/logo.jpg",
+                width: 160,
+                height: 160,
+              ),
               SizedBox(height: 20),
               TextField(
                 controller: name,
@@ -81,7 +86,20 @@ class _LoginPageState extends State<LoginPage> {
                 onPressed: () {
                   loginUser();
                 },
-                child: Text('Giriş Yap'),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.white, // Arka plan rengi beyaz
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(
+                        8.0), // Butonun kenarlarını hafifçe yuvarla
+                  ),
+                ),
+                child: Text(
+                  'Giriş Yap',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black // Yazıyı kalın yap
+                      ),
+                ),
               ),
             ],
           ),
