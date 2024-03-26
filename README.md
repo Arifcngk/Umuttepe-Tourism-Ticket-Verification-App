@@ -35,3 +35,4 @@ Herhangi bir geri bildiriminiz varsa, lütfen arifcngk@gmail.com adresinden bana
 
 
 ![ticket_view_ss](https://github.com/Arifcngk/umuttepe_turizm_muavin-/assets/93188117/e2dc4cb9-7920-483a-84dd-06a77860e74d)
+![api](https://github.com/Arifcngk/umuttepe_turizm_muavin-/assets/93188117/a1d17dcc-e94b-49c1-ab24-cb83b6225faf)
