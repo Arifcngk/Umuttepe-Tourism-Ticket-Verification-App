@@ -20,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
     if (name.text.isNotEmpty && password.text.isNotEmpty) {
       try {
         String uri =
-            "http://10.0.2.2:8080/flutter_api/login.php"; // Giriş kontrolü için PHP dosyasının yolunu belirtin
+            "http://10.0.2.2:8080/umuttepe_turizm_admin/services/login.php"; // Giriş kontrolü için PHP dosyasının yolunu belirtin
         var response = await http.post(Uri.parse(uri), body: {
           "name": name.text,
           "password": password.text,

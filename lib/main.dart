@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Umuttepe Turizm ',
-      home: HomePage(),
+      home: LoginPage(),
     );
   }
 }
