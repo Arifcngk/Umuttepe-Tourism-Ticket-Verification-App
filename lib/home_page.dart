@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:umuttepe_turizm/bilet_detay.dart';
 import 'package:umuttepe_turizm/ticketController.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
@@ -28,7 +29,9 @@ class _HomePageState extends State<HomePage> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => MyTicketView(pnrNumber: qrText),
+        builder: (context) => TicketDetails(
+          pnrCode: pnr,
+        ),
       ),
     );
   }
@@ -97,8 +100,8 @@ class _HomePageState extends State<HomePage> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => MyTicketView(
-                                        pnrNumber:
+                                    builder: (context) => TicketDetails(
+                                        pnrCode:
                                             pnr), // PNR numarasını parametre olarak geçir
                                   ),
                                 );

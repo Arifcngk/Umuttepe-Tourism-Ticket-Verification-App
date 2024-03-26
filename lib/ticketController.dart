@@ -5,16 +5,16 @@ import 'package:ticket_widget/ticket_widget.dart';
 import 'package:http/http.dart' as http;
 
 class MyTicketView extends StatefulWidget {
-  final String pnrNumber;
+  final TextEditingController pnrCodeController;
 
-  const MyTicketView({Key? key, required this.pnrNumber}) : super(key: key);
+  const MyTicketView({Key? key, required this.pnrCodeController})
+      : super(key: key);
 
   @override
   State<MyTicketView> createState() => _MyTicketViewState();
 }
 
 class _MyTicketViewState extends State<MyTicketView> {
-  TextEditingController idController = TextEditingController();
   String pnrCode = "";
   String nereden = "";
   String nereye = "";
@@ -29,37 +29,41 @@ class _MyTicketViewState extends State<MyTicketView> {
   void initState() {
     super.initState();
     // Sayfa yüklenirken getUserInfo fonksiyonunu çağırarak verileri çek
-    getUserInfo(int.parse(widget.pnrNumber));
+    if (widget.pnrCodeController.text.isNotEmpty) {
+      getUserInfo(widget.pnrCodeController.text);
+    }
   }
 
-  Future<void> getUserInfo(int id) async {
-    final response = await http.post(
-      Uri.parse("http://10.0.2.2:8080/flutter_api/pnr.php"), // API endpointi
-      body: {'id': id.toString()}, // Kullanıcı ID'si
-    );
+  Future<void> getUserInfo(String pnrCode) async {
+    try {
+      final response = await http.get(
+        Uri.parse(
+            "http://10.0.2.2:8080/flutter_api/deneme.php?pnr_code=$pnrCode"),
+      );
 
-    if (response.statusCode == 200) {
-      // HTTP isteği başarılı ise verileri al
-      Map<String, dynamic> data = json.decode(response.body);
-      setState(() {
-        pnrCode = data['pnr_code'];
-        nereden = data['nereden'];
-        nereye = data['nereye'];
-        adi = data['adi'];
-        soyadi = data['soyadi'];
-        tarih = data['tarih'];
-        koltuk = data['koltuk'];
-        plaka = data['plaka'];
-        saat = data['saat'];
-      });
-    } else {
-      // HTTP isteği başarısız ise hata mesajı göster
+      if (response.statusCode == 200) {
+        Map<String, dynamic> data = json.decode(response.body);
+        setState(() {
+          this.pnrCode = data['pnr_code'];
+          nereden = data['departure_city'];
+          nereye = data['arrival_city'];
+          adi = data['passenger_name'];
+          soyadi = data['passenger_last_name'];
+          tarih = data['departure_date'];
+          koltuk = data['seat_number'];
+          plaka = data['bus_plate_number'];
+          saat = data['departure_time'];
+        });
+      } else {
+        throw Exception('Bilet bilgileri alınamadı.');
+      }
+    } catch (e) {
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text('Hata'),
-            content: Text('Kullanıcı bilgileri alınamadı.'),
+            content: Text(e.toString()),
             actions: [
               TextButton(
                 onPressed: () {
@@ -86,7 +90,6 @@ class _MyTicketViewState extends State<MyTicketView> {
             isCornerRounded: true,
             padding: EdgeInsets.all(20),
             child: TicketData(
-              pnrNumber: widget.pnrNumber,
               pnrCode: pnrCode,
               nereden: nereden,
               nereye: nereye,
@@ -106,7 +109,6 @@ class _MyTicketViewState extends State<MyTicketView> {
 }
 
 class TicketData extends StatelessWidget {
-  final String pnrNumber;
   final String pnrCode;
   final String nereden;
   final String nereye;
@@ -119,7 +121,6 @@ class TicketData extends StatelessWidget {
 
   const TicketData({
     Key? key,
-    required this.pnrNumber,
     required this.pnrCode,
     required this.nereden,
     required this.nereye,
@@ -213,7 +214,7 @@ class TicketData extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(top: 10.0, left: 30.0, right: 30.0),
           child: Text(
-            'PNR Numarası :  $pnrNumber ',
+            'PNR Numarası :  $pnrCode ',
             style: TextStyle(
               color: Colors.black,
             ),
