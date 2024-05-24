@@ -1,17 +1,11 @@
-# Umuttepe Turizm -Muavin
+# Umuttepe Tourism Ticket Verification App
 
-Proje, Umuttepe Turizm firmasında satın alınan biletlerin PNR numaralarını kullanarak, muavin tarafından QR kod veya manuel olarak girilerek bilet bilgilerinin ekranda görüntülenmesini sağlayan bir Flutter uygulamasıdır. Bilet bilgileri, MySQL veritabanından PHP servisi aracılığıyla çekilmektedir.
-
-Uygulamanın genel yapısı şu şekildedir:
-
-Kullanıcılar bilet satın aldıktan sonra bir PNR numarası alırlar.
-Muavin, bu PNR numarasını uygulamaya girerek bilet bilgilerini alabilir.
-Bilet bilgileri, MySQL veritabanından PHP servisi aracılığıyla çekilir.
-Uygulama, çekilen bilet bilgilerini ekranda gösterir.
-Uygulamanın detaylı yapısını incelemek için, "Umuttepe Turizm Projesi" rapor bölümüne göz atabilirsiniz.
+This project is a Flutter application designed for Umuttepe Tourism, allowing bus attendants to verify ticket details using PNR numbers. The PNR numbers can be entered manually or scanned via a QR code, and the ticket information is displayed on the screen. The ticket data is fetched from a MySQL database through a PHP service.
 
 
-Kulanılan Kütüphaneler ;
+
+
+PubDev İmport ;
 
  cupertino_icons: ^1.0.2
 
@@ -29,9 +23,7 @@ Kulanılan Kütüphaneler ;
 - [@mehmetseezer](https://github.com/mehmetseezer) tasarım ve geliştirme için.
 
   
-## Geri Bildirim
 
-Herhangi bir geri bildiriminiz varsa, lütfen arifcngk@gmail.com adresinden bana ulaşın.
 
 
 ![ticket_view_ss](https://github.com/Arifcngk/umuttepe_turizm_muavin-/assets/93188117/e2dc4cb9-7920-483a-84dd-06a77860e74d)
